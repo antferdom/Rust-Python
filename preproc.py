@@ -34,14 +34,16 @@ def read_jsonl(filename: str) -> Iterable[Dict]:
         with open(filename, "r") as fp:
             for line in fp:
                 if any(not x.isspace() for x in line):
-                    # print(line)
+                    print(line)
                     yield json.loads(line)
 
-def read_logs() -> Dict[str, Dict]:
-    return {log["reason"]: log for log in read_jsonl(FILE)}
+def read_logs() -> Dict[str, List[Dict]]:
+    return [{log["reason"]: log } for log in read_jsonl(FILE)]
 
 
-logs: Dict[str, Dict] = read_logs()
+logs: Dict[str, List[Dict]] = read_logs()
+print("Starting debug...")
+print(logs[0]["compiler-message"]["message"]["spans"][0]["file_name"])
 print("Rust Cargo build status {}".format(logs["build-finished"]["success"]))
 print(logs["compiler-message"]["message"])
 print("What logs have?")
