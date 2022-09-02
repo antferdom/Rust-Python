@@ -44,6 +44,7 @@ def read_logs() -> Dict[str, List[Dict]]:
 logs: Dict[str, List[Dict]] = read_logs()
 print("Starting debug...")
 print(logs[0]["compiler-message"]["message"]["spans"][0]["file_name"])
-print("Rust Cargo build status {}".format(logs["build-finished"]["success"]))
-print(logs["compiler-message"]["message"])
+print("Rust Cargo build status {}".format(logs[3]["build-finished"]["success"]))
+# Now logs is a List
+# print(logs["compiler-message"]["message"])
 print("What logs have?")
